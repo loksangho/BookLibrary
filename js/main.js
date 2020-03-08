@@ -3,12 +3,26 @@ var firestore = firebase.firestore();
 //let myLibrary = [];
 
 
-function Book(title, author, num_of_pages, have_read) {
-    this.title = title;
-    this.author = author;
-    this.num_of_pages = num_of_pages;
-    this.have_read = have_read;
-    this.info = function () {
+//function Book(title, author, num_of_pages, have_read) {
+//    this.title = title;
+//    this.author = author;
+//    this.num_of_pages = num_of_pages;
+//    this.have_read = have_read;
+//    this.info = function () {
+//        return this.title + " by " + this.author + ", " + this.num_of_pages + ", " + this.have_read;
+//    }
+//}
+
+class Book {
+
+    constructor(title, author, num_of_pages, have_read) {
+        this.title = title;
+        this.author = author;
+        this.num_of_pages = num_of_pages;
+        this.have_read = have_read;
+    }
+    
+    info() {
         return this.title + " by " + this.author + ", " + this.num_of_pages + ", " + this.have_read;
     }
 }
