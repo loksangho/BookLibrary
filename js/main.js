@@ -56,7 +56,7 @@ function render() {
                     //let currentBook = myLibrary[i];
                     let newBookDiv = document.createElement("div");
                     newBookDiv.classList.add("book_card")
-                    newBookDiv.innerHTML = `<p><strong>${myData.title + "</strong> by <em>" + myData.author + "</em>, " + myData.num_of_pages + "pages, " + (myData.have_read ? "Have read" : "Have not read")}</p><button class="remove_book_button atest" data-book-number="${doc.id}">Remove Book from Library</button><button class="toggle_have_read" data-book-number-read="${doc.id}">${(myData.have_read ? "Read" : "Not Read")}</button>`
+                    newBookDiv.innerHTML = `<p><strong>${myData.title + "</strong> by <em>" + myData.author + "</em>, " + myData.num_of_pages + "pages"}</p><button class="remove_book_button atest" data-book-number="${doc.id}">Remove Book from Library</button><button class="toggle_have_read" data-book-number-read="${doc.id}">${(myData.have_read ? "Read" : "Not Read")}</button>`
                     if (!myData.have_read) {
                         newBookDiv.querySelector(`[data-book-number-read=${doc.id}]`).classList.add("red");
                     } else {
