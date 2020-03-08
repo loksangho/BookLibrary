@@ -22,3 +22,12 @@
 h1 {
     text-align: center;
 }
+
+.toggle_have_read {
+    background-color: green;
+}
+
+.red {
+    background-color:red;
+}
+

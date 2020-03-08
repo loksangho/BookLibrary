@@ -37,27 +37,39 @@ function addBookToLibrary(book) {
 }
 
 function render() {
-    let container = document.querySelector("#books_container");
-    let child = container.lastElementChild;
-    while (child) {
-        container.removeChild(child);
-        child = container.lastElementChild;
-    }
-    firestore.collection("library").get().then(function (querySnapshot) {
-        querySnapshot.forEach(function (doc) {
-            // doc.data() is never undefined for query doc snapshots
-            console.log(doc.id, " => ", doc.data());
 
-            const myData = doc.data();
-            //let currentBook = myLibrary[i];
-            let newBookDiv = document.createElement("div");
-            newBookDiv.classList.add("book_card")
-            newBookDiv.innerHTML = `<p><strong>${myData.title + "</strong> by <em>" + myData.author + "</em>, " + myData.num_of_pages + "pages, " + (myData.have_read ? "Have read" : "Have not read")}</p><button class="remove_book_button atest" data-book-number="${doc.id}">Remove Book from Library</button><button class="toggle_have_read" data-book-number="${doc.id}">Toggle Read Status</button>`
-            container.appendChild(newBookDiv);
+    firestore.collection("library").onSnapshot(
+        function (querySnapshot) {
+            let container = document.querySelector("#books_container");
+            let child = container.lastElementChild;
+            while (child) {
+                container.removeChild(child);
+                child = container.lastElementChild;
+            }
+            querySnapshot.forEach(function (doc) {
+                    // doc.data() is never undefined for query doc snapshots
 
 
+                    console.log(doc.id, " => ", doc.data());
+
+                    const myData = doc.data();
+                    //let currentBook = myLibrary[i];
+                    let newBookDiv = document.createElement("div");
+                    newBookDiv.classList.add("book_card")
+                    newBookDiv.innerHTML = `<p><strong>${myData.title + "</strong> by <em>" + myData.author + "</em>, " + myData.num_of_pages + "pages, " + (myData.have_read ? "Have read" : "Have not read")}</p><button class="remove_book_button atest" data-book-number="${doc.id}">Remove Book from Library</button><button class="toggle_have_read" data-book-number-read="${doc.id}">${(myData.have_read ? "Read" : "Not Read")}</button>`
+                    if (!myData.have_read) {
+                        newBookDiv.querySelector(`[data-book-number-read=${doc.id}]`).classList.add("red");
+                    } else {
+                        newBookDiv.querySelector(`[data-book-number-read=${doc.id}]`).classList.remove("red");
+                    }
+                    container.appendChild(newBookDiv);
+
+
+                }
+
+
+            )
         });
-    });
 
 
     //    for (let i = 0; i < myLibrary.length; i++) {
@@ -94,16 +106,16 @@ window.addEventListener("click", e => {
             console.error("Error removing document: ", error);
         });
 
-        render();
+        //render();
     } else if (e.target.classList[0] == "toggle_have_read") {
         //myLibrary[e.target.getAttribute("data-book-number")].toggleHaveRead();
 
 
-        firestore.collection("library").doc(e.target.getAttribute("data-book-number")).get().then(function (doc) {
+        firestore.collection("library").doc(e.target.getAttribute("data-book-number-read")).get().then(function (doc) {
             if (doc && doc.exists) {
 
                 const myData = doc.data();
-                firestore.collection("library").doc(e.target.getAttribute("data-book-number")).update({
+                firestore.collection("library").doc(e.target.getAttribute("data-book-number-read")).update({
                         have_read: !myData.have_read
                     })
                     .then(function () {
@@ -118,7 +130,7 @@ window.addEventListener("click", e => {
         })
 
 
-        render();
+        //render();
     }
 })
 
@@ -159,11 +171,11 @@ function processForm(e) {
     document.getElementById("num_of_pages_input").value = "";
     document.getElementById("read_true").checked = false;
     document.getElementById("read_false").checked = false;
-    
-    
+
+
     document.getElementById("new_book_form").style.display = "none";
 
-    render();
+    //render();
 
 
     // You must return false to prevent the default form behavior
