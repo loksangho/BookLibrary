@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>
+        Library
+    </title>
+
+    <link type="text/css" rel="stylesheet" href="css/main.css">
+</head>
+
+<body>
+
+    <h1>My Book Library</h1>
+
+    <div id="books_container">
+
+    </div>
+
+    <button id="new_book_button">NEW BOOK</button>
+
+    <form id="new_book_form">
+        <label for="author">Author:</label>
+        <input type="text" name="author" id="author_input">
+        <br>
+        <label for="title">Title:</label>
+        <input type="text" name="title" id="title_input">
+        <br>
+        <label for="num_of_pages">Number of Pages:</label>
+        <input type="text" name="num_of_pages" id="num_of_pages_input">
+        <br />
+        <label for="have_read">Have you read it?</label>
+        <input type="radio" id="read_true" name="have_read">
+        <label for="read_true">Yes</label>
+        <input type="radio" id="read_false" name="have_read">
+        <label for="read_false">No</label>
+        <input type="submit" value="Submit">
+
+    </form>
+
+    <!-- The core Firebase JS SDK is always required and must be listed first -->
+    <script src="https://www.gstatic.com/firebasejs/7.10.0/firebase-app.js"></script>
+
+    <!-- TODO: Add SDKs for Firebase products that you want to use
+     https://firebase.google.com/docs/web/setup#available-libraries -->
+    <script src="https://www.gstatic.com/firebasejs/7.10.0/firebase-firestore.js"></script>
+    <script>
+        // Your web app's Firebase configuration
+        var firebaseConfig = {
+            apiKey: "AIzaSyDn68hIOiH64tUb-k6UjalgtqmR0R0YeQs",
+            authDomain: "book-library-9f1c7.firebaseapp.com",
+            databaseURL: "https://book-library-9f1c7.firebaseio.com",
+            projectId: "book-library-9f1c7",
+            storageBucket: "book-library-9f1c7.appspot.com",
+            messagingSenderId: "594968895773",
+            appId: "1:594968895773:web:80626102aa4f6060f901f4"
+        };
+        // Initialize Firebase
+        firebase.initializeApp(firebaseConfig);
+
+    </script>
+    <script type="text/javascript" src="js/main.js"></script>
+
+</body>
+
+</html>
